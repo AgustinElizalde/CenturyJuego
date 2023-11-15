@@ -69,7 +69,31 @@ main{
     transition: all .5s;
 }
 
+.btn{
+    padding: 20px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #cfcfcf;
+    background: #653780;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    box-shadow: 10px 13px 21px -7px rgba(0,0,0,0.75);
+    cursor: pointer;
+    transition: all .5s;
+    margin-left: 620px;
+}
+
+.img_key{
+    width: 100px;
+    height: 100px;
+}
+
 .btnAction:hover{
+    transform: scale(1.4);
+}
+
+.btn:hover{
     transform: scale(1.4);
 }
 
@@ -85,6 +109,15 @@ main{
     color: #fff;
     padding: 20px;
     transition: all .3s;
+}
+
+.texto{
+    font-family: monospace;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    margin: 50px;
+    margin-top: -200px;
 }
 
 .item{

@@ -1,15 +1,18 @@
 let fondo;
 let nave;
+let sonido;
+let sonidoMuerte;
 let disparos = [];
+let disparoNave2;
 const cadencia = 150;
 let ultimoDisparo = 0;
 let enemigos = [];
 let disparosEnemigos = [];
 const enemyShips = [
-  'assets/enemyShip1.png',
-  'assets/enemyShip2.png',
-  'assets/enemyShip3.png',
-  'assets/enemyShip4.png'
+  'assets/enemigoInfinito.png',
+  'assets/enemigoInfinito2.png',
+  'assets/enemigoInfinito3.png',
+  'assets/enemigoInfinito4.png'
 ];
 
 const naveRadio = 15;
@@ -22,26 +25,17 @@ let vidaJugador = 500;
 let barraVidaAncho = 2 * naveRadio;
 let barraVidaAlto = 10;
 
-let puntaje = 0;
+let puntaje = 0; //puntaje (ooo)
 
 let gameOver = false;
 let reiniciarBoton;
 let menuBoton;
 
-let siguienteNivelBtn;
-
-let tiempoInicio;
-let tiempoGenereacion;
-
-let duracionNivel = 60000;
-let tiempoNivel;
-let nivelCompletado = false;
-
 function preload() {
-  fondo = loadImage('assets/fondo.jpg');
-  sonidoMuerte = loadSound('assets/sonidoMuerte.wav');
+  fondo = loadImage('assets/zonaInfinita.png');
   sonido = loadSound('assets/musica_fondo.mp3');
   disparoNave2 = loadSound('assets/disparo.wav');
+  sonidoMuerte = loadSound('assets/sonidoMuerte.wav');
 }
 
 function Nave() {
@@ -55,7 +49,7 @@ function Nave() {
     this.posicion.add(this.velocidad);
     this.velocidad.mult(0.99);
 
-    if (this.posicion.x < 0) {
+    if (this.posicion.x < 0) { 
       this.posicion.x = 0;
       this.velocidad.x = 0;
     } else if (this.posicion.x > canvasX) {
@@ -74,11 +68,6 @@ function Nave() {
   this.aceleracion = function () {
     let acc = p5.Vector.fromAngle(this.direccion.heading() + PI / 2);
     this.velocidad.add(acc.mult(-0.08));
-  }
-  
-  this.retroceso = function () {
-    let retroceder = p5.Vector.fromAngle(this.direccion.heading() + PI / 2);
-    this.velocidad.add(retroceder.mult(0.08));
   }
 
   this.draw = function () {
@@ -180,6 +169,7 @@ function NaveEnemiga(naveJugador) {
     imageMode(CENTER);
     image(this.asset, 0, 0, 50, 50);
     pop();
+
   };
 }
 
@@ -223,24 +213,20 @@ function colision(disparo, nave) {
 function setup() {
   createCanvas(canvasX, canvasY);
   frameRate(60);
-  tiempoInicio = millis();
   sonido.loop();
-
+  
   nave = new Nave();
 
   //generación de enemigos
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 10; i++) {
     enemigos.push(new NaveEnemiga(nave));
   }
   
   reiniciarBoton = createButton('Volver a intentarlo');
   menuBoton = createButton('Volver al menú');
-  
-  siguienteNivelBtn = createButton('Siguiente Nivel');
 
   reiniciarBoton.class('boton-juego');
   menuBoton.class('boton-juego');
-  siguienteNivelBtn.class('boton-juego');
 
   // Calcula la posición en el centro de la pantalla
   let centroX = canvasX / 2;
@@ -251,25 +237,25 @@ function setup() {
   let botonAncho = 200; // Ancho de los botones
 
   reiniciarBoton.position(centroX - botonAncho / 2, centroY + 50);
-  siguienteNivelBtn.position(centroX - botonAncho / 2, centroY + 50);
   menuBoton.position(centroX - botonAncho / 2, centroY + 50 + reiniciarBoton.height + margenEntreBotones);
 
   reiniciarBoton.mousePressed(reiniciar);
   menuBoton.mousePressed(volverAlMenu);
-  siguienteNivelBtn.mousePressed(siguienteNivel);
 
   reiniciarBoton.hide();
   menuBoton.hide();
-  siguienteNivelBtn.hide();
 }
 
 function draw() {
   background(fondo);
 
-  if (!gameOver && !nivelCompletado) {
+  if (!gameOver) {
     nave.draw();
     nave.giro();
     nave.movimiento();
+    
+    let tiempoGen = millis();
+    let tiempoInicio;
     
     textSize(24);
     fill(255);
@@ -277,10 +263,6 @@ function draw() {
 
     if (keyIsDown(87)) {
       nave.aceleracion();
-    }
-    
-    if (keyIsDown(83)) {
-      nave.retroceso();
     }
 
     if (keyIsDown(65)) {
@@ -340,26 +322,24 @@ function draw() {
       }
     }
     
-    tiempoGeneracion = millis() - tiempoInicio;
-    
-    if(tiempoGeneracion > 3000){
-      
-      tiempoNivel = millis();
+    if(tiempoGen >= 3000){
     
       for (let i = 0; i < enemigos.length; i++) {
         enemigos[i].draw();
         enemigos[i].movimiento();
         enemigos[i].disparo();
       }
-      
-      if (frameCount % 60 == 0) {
-        enemigos.push(new NaveEnemiga(nave));
-      }
+    
+    }
 
-      if (enemigos.length > 25) {
-        enemigos.splice(0, 1);
-      }
-     
+
+
+    if (frameCount % 60 == 0) {
+      enemigos.push(new NaveEnemiga(nave));
+    }
+
+    if (enemigos.length > 25) {
+      enemigos.splice(0, 1);
     }
 
     push();
@@ -373,26 +353,7 @@ function draw() {
     rect(0, 0, barraVidaActual, barraVidaAlto);
     pop();
     
-    if(tiempoNivel > duracionNivel){
-      nivelCompletado = true;
-    }
-
-  } else if(nivelCompletado){
-    
-      textSize(32);
-      fill(255);
-      textAlign(CENTER);
-      text('¡Nivel Completado!', canvasX / 2, canvasY / 2 - 50);
-  
-      textSize(24);
-      textAlign(CENTER);
-      text(`Puntaje: ${puntaje}`, canvasX / 2, canvasY / 2);
-  
-      siguienteNivelBtn.show();
-      menuBoton.show();
-      
-    } else {
-      
+  } else {
     textSize(32);
     fill(255);
     textAlign(CENTER);
@@ -421,19 +382,14 @@ function reiniciar() {
   // Restablece la posición del jugador
   nave = new Nave();
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 12; i++) {
       enemigos.push(new NaveEnemiga(nave));
   }
+
 }
 
 function volverAlMenu() {
   window.location.href = 'index.html';
-  enviarPuntajeAlServidor();
-}
-
-function siguienteNivel(){
-  vidaJugador = 500;
-  window.location.href = 'historia2.html';
 }
 
 function enviarPuntajeAlServidor() {
@@ -451,4 +407,3 @@ function enviarPuntajeAlServidor() {
 
   xhr.send("puntaje=" + puntaje);
 }
-

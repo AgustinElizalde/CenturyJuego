@@ -38,7 +38,7 @@ let tiempoNivel;
 let nivelCompletado = false;
 
 function preload() {
-  fondo = loadImage('assets/fondo.jpg');
+  fondo = loadImage('assets/mundo.png');
   sonidoMuerte = loadSound('assets/sonidoMuerte.wav');
   sonido = loadSound('assets/musica_fondo.mp3');
   disparoNave2 = loadSound('assets/disparo.wav');
@@ -428,12 +428,12 @@ function reiniciar() {
 
 function volverAlMenu() {
   window.location.href = 'index.html';
-  enviarPuntajeAlServidor();
 }
 
 function siguienteNivel(){
   vidaJugador = 500;
-  window.location.href = 'historia2.html';
+  enviarPuntajeAlServidor();
+  window.location.href = 'capitulo3.html';
 }
 
 function enviarPuntajeAlServidor() {
@@ -451,4 +451,3 @@ function enviarPuntajeAlServidor() {
 
   xhr.send("puntaje=" + puntaje);
 }
-
