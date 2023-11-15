@@ -11,7 +11,7 @@ $consulta = mysqli_query($ruta,$sql);
 
 if($consulta) {
     echo"Nombre guardado con exito";
-    header("Location: ../eleccion.html");
+    header("Location: ../paginas/eleccion.html");
 }
 else {
     echo "Algo salio mal" . mysqli_error($ruta);

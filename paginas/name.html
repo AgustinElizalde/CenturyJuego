@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Century</title>
-
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
+    
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="../css/style.css">
 
 
 </head>
@@ -21,12 +21,22 @@
 <style>
 
   body{
-    background: url("assets/mundoZonaInfinita.jpg");
+    background: url("../assets/mundoZonaInfinita.jpg");
   }
   
   .btnAction{
     margin: 20px;
   }
+
+  .textTitle{
+    color: white;
+  }
+
+  .inputText{
+    margin-top: 15px;
+    border-radius: 15px;
+  }
+
 
 </style>
 
@@ -40,20 +50,31 @@
 
         </div>
 
-        <div class="titulo">
-            <h1><a href="index.html">Century</a></h1>
-        </div>
-
     </div>
 
     <main>
-        <h2 class="texto">Después de una ardua lucha, la nave Century emerge victoriosa en la órbita lunar. La resistencia terrestre celebra la valentía del piloto espacial y la liberación de la Luna. Sin embargo, la guerra aún no ha terminado.
-        </h2>
+      
+        <form method="POST" action="../php/consulta.php">
+            <label for="name" class="textTitle">Ingrese su nombre:</label>
+            <br>
+            <input type="text" name="usuario" class="inputText" required>
+            <br>
+            <input type="submit" value="Ingresar" class="btnAction">
+        </form>
+
     </main>
-    <a href="eleccion.html" class="btn">Inicio</a>
+
+    <script src="../js/main.js"></script>
+
+    
+</body>
+
+</html>
 
 
-    <script src="js/main.js"></script>
+    </main>
+
+    <script src="../js/main.js"></script>
 
     
 </body>

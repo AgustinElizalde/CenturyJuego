@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Century</title>
     
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 
 </head>
@@ -21,22 +21,12 @@
 <style>
 
   body{
-    background: url("assets/mundoZonaInfinita.jpg");
+    background: url("../assets/mundoZonaInfinita.jpg");
   }
   
   .btnAction{
     margin: 20px;
   }
-
-  .textTitle{
-    color: white;
-  }
-
-  .inputText{
-    margin-top: 15px;
-    border-radius: 15px;
-  }
-
 
 </style>
 
@@ -50,31 +40,20 @@
 
         </div>
 
+        <div class="titulo">
+            <h1><a href="../index.html">Century</a></h1>
+        </div>
+
     </div>
 
     <main>
       
-        <form method="POST" action="php/consulta.php">
-            <label for="name" class="textTitle">Ingrese su nombre:</label>
-            <br>
-            <input type="text" name="usuario" class="inputText" required>
-            <br>
-            <input type="submit" value="Ingresar" class="btnAction">
-        </form>
+        <a href="historia1.html"><button class="btnAction">Modo historia</button></a>
+        <a href="historiaInfinita.html"><button class="btnAction">Zona fantasma</button></a>
 
     </main>
 
-    <script src="js/main.js"></script>
-
-    
-</body>
-
-</html>
-
-
-    </main>
-
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 
     
 </body>

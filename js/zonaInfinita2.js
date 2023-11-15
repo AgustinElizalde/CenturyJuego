@@ -9,10 +9,10 @@ let ultimoDisparo = 0;
 let enemigos = [];
 let disparosEnemigos = [];
 const enemyShips = [
-  'assets/enemigoInfinito.png',
-  'assets/enemigoInfinito2.png',
-  'assets/enemigoInfinito3.png',
-  'assets/enemigoInfinito4.png'
+  '../assets/enemigoInfinito.png',
+  '../assets/enemigoInfinito2.png',
+  '../assets/enemigoInfinito3.png',
+  '../assets/enemigoInfinito4.png'
 ];
 
 const naveRadio = 15;
@@ -32,15 +32,15 @@ let reiniciarBoton;
 let menuBoton;
 
 function preload() {
-  fondo = loadImage('assets/zonaInfinita.png');
-  sonido = loadSound('assets/musica_fondo.mp3');
-  disparoNave2 = loadSound('assets/disparo.wav');
-  sonidoMuerte = loadSound('assets/sonidoMuerte.wav');
+  fondo = loadImage('../assets/zonaInfinita.png');
+  sonido = loadSound('../assets/musica_fondo.mp3');
+  disparoNave2 = loadSound('../assets/disparo.wav');
+  sonidoMuerte = loadSound('../assets/sonidoMuerte.wav');
 }
 
 function Nave() {
   this.posicion = createVector(canvasX / 2, canvasY - 200);
-  this.asset = loadImage('assets/spaceship1.png');
+  this.asset = loadImage('../assets/spaceship1.png');
   this.direccion = createVector(1, 0);
   this.rotacion = 0;
   this.velocidad = createVector(0, 0);
@@ -93,7 +93,7 @@ function disparo(navePos, naveDir) {
   this.vel = p5.Vector.fromAngle(naveDir.heading() - PI / 2);
   this.vel.mult(15);
   this.direcion = naveDir.heading();
-  this.asset = loadImage('assets/bullet.png');
+  this.asset = loadImage('../assets/bullet.png');
 
   this.move = function () {
     this.pos.add(this.vel);
@@ -180,7 +180,7 @@ function disparoEnemigo(navePos, naveDir) {
   this.vel = p5.Vector.fromAngle(naveDir.heading());
   this.vel.mult(15);
   this.direcion = naveDir.heading();
-  this.asset = loadImage('assets/enemyBullet.png');
+  this.asset = loadImage('../assets/enemyBullet.png');
 
   this.move = function () {
     this.pos.add(this.vel);
@@ -389,14 +389,14 @@ function reiniciar() {
 }
 
 function volverAlMenu() {
-  window.location.href = 'index.html';
+  window.location.href = '../index.html';
 }
 
 function enviarPuntajeAlServidor() {
   console.log("Enviando puntuación al servidor:", puntaje);
   var xhr = new XMLHttpRequest();
 
-  xhr.open("POST", "php/puntaje.php", true);
+  xhr.open("POST", "../php/puntaje.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
   xhr.onreadystatechange = function () {
