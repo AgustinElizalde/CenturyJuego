@@ -5,6 +5,10 @@
     font-family: 'Comfortaa', cursive;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .navbar{
     background: #000;
     padding: 20px;
@@ -81,7 +85,11 @@ main{
     box-shadow: 10px 13px 21px -7px rgba(0,0,0,0.75);
     cursor: pointer;
     transition: all .5s;
-    margin-left: 620px;
+}
+
+.contenedor-btn{
+    margin-right: 44%;
+    margin-top: 25%;
 }
 
 .img_key{
